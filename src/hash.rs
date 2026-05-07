@@ -76,8 +76,8 @@ pub fn low_level_hash(seed: u64, input: &[u8]) -> u64 {
                 };
                 let mix1 = mul128(c0 ^ SALT[i * 2 + 1], c1 ^ dup[i]);
                 let mix2 = mul128(c2 ^ SALT[i * 2 + 2], c3 ^ dup[i]);
-                dup[i] = mix1.rotate_left(32);
-                dup[i] ^= mix2.rotate_left(32);
+                dup[i] = mix1;
+                dup[i] ^= mix2;
             }
             ptr = unsafe { ptr.add(64) };
             len -= 64;
@@ -88,7 +88,7 @@ pub fn low_level_hash(seed: u64, input: &[u8]) -> u64 {
     while len > 16 {
         let (c0, c1) = unsafe { (read_u64(ptr), read_u64(ptr.add(8))) };
         let mixed = mul128(c0 ^ SALT[1], c1 ^ state);
-        state = mixed.rotate_left(32);
+        state = mixed;
         ptr = unsafe { ptr.add(16) };
         len -= 16;
     }
@@ -106,7 +106,6 @@ pub fn low_level_hash(seed: u64, input: &[u8]) -> u64 {
     }
 
     let mut mixed = mul128(chunk[0] ^ SALT[1], chunk[1] ^ state);
-    mixed = mixed.rotate_left(32);
     mixed = mul128(mixed, (starting_len as u64) ^ SALT[1]);
-    mixed.rotate_left(32)
+    mixed
 }

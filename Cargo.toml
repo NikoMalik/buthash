@@ -1,6 +1,6 @@
 [package]
 name = "buthash"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "Fast hash for structs, slices and integers"                                                                                                  
 license = "Apache-2.0"                                                                                                                                                  
