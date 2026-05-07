@@ -2,6 +2,9 @@
 name = "buthash"
 version = "0.1.0"
 edition = "2024"
+description = "Fast hash for structs, slices and integers"                                                                                                  
+license = "Apache-2.0"                                                                                                                                                  
+repository = "https://github.com/NikoMalik/buthash"
 
 [dependencies]
 bytemuck = { version = "1.14", features = ["derive"] }
